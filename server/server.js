@@ -27,6 +27,11 @@ const newVideoValidate = [
 ];
 
 
+app.get("/", (req, res) => {
+  res.json('server is running in AWS successfully');
+});
+
+
 app.get("/videos/data", async (req, res) => {
   try {
     const videos = await pool.query("select * from videos")
