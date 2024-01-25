@@ -9,7 +9,7 @@ const cors = require("cors");
 const pool = require("./db");
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5002;
 
 app.use(express.static(path.join(__dirname, "build")));
 app.use(bodyParser.json());
