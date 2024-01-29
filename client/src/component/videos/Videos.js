@@ -7,7 +7,7 @@ import LikeComponent from "../likeAndDisLike/LikeComponent";
 const Videos = () => {
   const [videos, setVideos] = useState([]);
   const url =
-    "https://beko-video-project-fs-assessment-backend.onrender.com/videos/data";
+    "http://ec2-18-212-171-8.compute-1.amazonaws.com:5002/videos/data";
 
   
   const fetchVideoData = async () => {

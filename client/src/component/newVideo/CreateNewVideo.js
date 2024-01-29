@@ -8,7 +8,7 @@ const CreateNewVideo = () => {
   const [error, setError] = useState(false);
 
   const urlForNewVideo =
-    "https://beko-video-project-fs-assessment-backend.onrender.com/videos/data/create";
+    "http://ec2-18-212-171-8.compute-1.amazonaws.com:5002/videos/data/create";
 
   const clickHandler = async (e) => {
     e.preventDefault();

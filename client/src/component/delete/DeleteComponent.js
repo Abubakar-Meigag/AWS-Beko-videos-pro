@@ -3,7 +3,7 @@ import axios from "axios";
 import './delete.css'
 
 const DeleteComponent = ({ id, onDeleteHandler }) => {
-  const url = `https://beko-video-project-fs-assessment-backend.onrender.com/videos/data/${id}`;
+  const url = `http://ec2-18-212-171-8.compute-1.amazonaws.com:5002/videos/data/${id}`;
 
   const deleteVideo = async () => {
     try {
