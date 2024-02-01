@@ -1,0 +1,27 @@
+name: Sync to S3
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18' 
+
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Sync to S3
+      uses:  github.com/beko-s3-keyAccess/s3-sync-action@v1
+      with:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        SOURCE_DIR: ./path/to/source  
+        BUCKET_NAME: beko-videos      
+        DEST_DIR: /path/in/s3      
