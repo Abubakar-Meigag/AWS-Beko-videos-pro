@@ -18,7 +18,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Sync to S3
-      uses: beko-s3-keyAccess/s3-sync-action@v1
+      uses:  github.com/beko-s3-keyAccess/s3-sync-action@v1
       with:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
