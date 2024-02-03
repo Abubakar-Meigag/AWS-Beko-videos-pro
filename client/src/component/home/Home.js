@@ -9,7 +9,7 @@ const Home = () => {
   const [searchInput, setSearchInput] = useState("");
 
   const url =
-    "http://ec2-18-212-171-8.compute-1.amazonaws.com:5002/videos/data";
+    "http://ec2-54-224-245-13.compute-1.amazonaws.com:5002/videos/data";
 
   const videoData = async () => {
     try {
