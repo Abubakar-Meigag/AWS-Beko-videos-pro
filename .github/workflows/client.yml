@@ -25,4 +25,4 @@ jobs:
         run: npm install && npm run build
   
       - name: Deploy the site 
-        run: aws s3 sync s3://beko-videos --delete
+        run: aws s3 sync ./client/build s3://beko-videos --delete
