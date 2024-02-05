@@ -6,35 +6,26 @@ on:
       - main
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Server Dependencies
-        id: install-dependencies
-        working-directory: ./server
-        continue-on-error: false
-        run: npm install
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.14.0
 
-      - name: Deploy to server
-        uses: appleboy/ssh-action@master
+      - name: Install dependencies and deploy to EC2
+        working-directory: ./server
+        run: |
+          npm install
+          git push origin main
+          npm install
+          pm2 restart server.js
         env:
-          EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
           HOST: ${{ secrets.HOST_DNS }}
           USERNAME: ${{ secrets.USERNAME }}
-        with:
-          script: |
-            date
-            pwd
-            ls -la
-            cd ./server
-            npm install
-            git pull origin main
-            npm install
-            /usr/local/bin/pm2 restart server.js
-
-      - name: Check PM2 process status
-        run: /usr/local/bin/pm2 list
+          KEY: ${{ secrets.EC2_SSH_KEY }}
