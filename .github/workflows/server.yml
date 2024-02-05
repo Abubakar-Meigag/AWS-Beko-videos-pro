@@ -6,12 +6,8 @@ on:
       - main
 
 jobs:
-  build:
-    runs-on: self-hosted
-    strategy:
-      matrix:
-        node-version: 
-          - latest
+  deploy:
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -20,11 +16,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 
-            - 18
+          node-version: 18.14.0
 
       - name: Navigate to server directory
-        run: cd ./server/server.js
+        run: cd server
 
       - name: Install dependencies
         id: install-dependencies
