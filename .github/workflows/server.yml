@@ -35,3 +35,7 @@ jobs:
       - name: Check PM2 process status
         working-directory: ./server
         run: pm2 list
+        env:
+          HOST: ${{ secrets.HOST_DNS }}
+          USERNAME: ${{ secrets.USERNAME }}
+          KEY: ${{ secrets.EC2_SSH_KEY }}
