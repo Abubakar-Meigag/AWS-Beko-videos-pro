@@ -7,17 +7,25 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to EC2 on level-300 branch push
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout the files
-        uses: actions/checkout@v4
-        
-      - name: Deploy to server
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      - name: Install dependencies and deploy to EC2
         working-directory: ./server
-        uses: easingthemes/ssh-deploy@main
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          REMOTE_HOST: ${{ secrets.HOST_DNS }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
+        run: |
+          npm install
+          git pull origin main
+          npm install
+          pm2 start server.js
+
+      - name: Start Server/Run Application
+        id: start-server
+        run: pm2 restart server.js
