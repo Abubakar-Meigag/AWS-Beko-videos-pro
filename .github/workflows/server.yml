@@ -18,23 +18,16 @@ jobs:
         with:
           node-version: 18.14.0
 
-      - name: Navigate to server directory
-        run: cd ./server
-
-      - name: Install dependencies
+      - name: Install dependencies and deploy to EC2
         working-directory: ./server
-        run: npm install
-
-      - name: Deploy to EC2
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST_DNS }}
-          username: ${{ secrets.USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-
-          working-directory: ./server
-          script: |
-            cd ./server
-            git pull origin main
-            npm install
-            pm2 restart server.js
+        run: |
+          pwd
+          ls -la
+          npm install
+          git pull origin main
+          npm install
+          pm2 restart server.js
+        env:
+          HOST: ${{ secrets.HOST_DNS }}
+          USERNAME: ${{ secrets.USERNAME }}
+          KEY: ${{ secrets.EC2_SSH_KEY }}
