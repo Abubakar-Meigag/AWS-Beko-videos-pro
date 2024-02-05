@@ -18,6 +18,9 @@ jobs:
         with:
           node-version: 18.14.0
 
+      - name: Navigate to server directory
+        run: cd ./server
+
       - name: Install dependencies
         run: npm install
 
@@ -28,7 +31,6 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /path/to/your/server
             git pull origin main
             npm install
             pm2 restart server.js
