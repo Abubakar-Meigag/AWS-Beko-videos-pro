@@ -20,7 +20,7 @@ jobs:
             - 18
 
       - name: Navigate to server directory
-        run: cd /.github/workflows/server.yml
+        run: cd ./server/server.js
 
       - name: Install dependencies
         id: install-dependencies
