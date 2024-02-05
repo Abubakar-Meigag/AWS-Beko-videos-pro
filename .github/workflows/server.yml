@@ -22,20 +22,23 @@ jobs:
       - name: Deploy to server
         uses: appleboy/ssh-action@master
         env:
-          EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
-          HOST_DNS: ${{ secrets.HOST_DNS }}
-          USERNAME: ${{ secrets.USERNAME }}
+          ec2-ssh-key: ${{ secrets.EC2_SSH_KEY }}
+          host-dns: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
 
       - name: Run Tests
         run: echo "No tests are available for this project"
 
-      - name: Start Server/Run Application
-        id: start-server
-        run: |
-          npm install -g pm2
-          pm2 restart BackendAPI
+      - name: Install dependencies and deploy to EC2
         working-directory: ./server
-        continue-on-error: false
+        run: |
+          date
+          pwd
+          ls -la
+          npm install
+          git pull origin main
+          npm install
+          /usr/local/bin/pm2 start server.js
 
       - name: Handle Errors
         if: steps.install-dependencies.outcome != 'success' || steps.create-env-file.outcome != 'success' || steps.start-server.outcome != 'success'
