@@ -19,10 +19,9 @@ jobs:
           node-version: 18.14.0
 
       - name: Navigate to server directory
-        run: cd server
+        run: cd ./server
 
       - name: Install dependencies
-        id: install-dependencies
         run: npm install
 
       - name: Deploy to EC2
