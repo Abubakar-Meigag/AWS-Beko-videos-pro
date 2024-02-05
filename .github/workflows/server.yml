@@ -31,7 +31,9 @@ jobs:
           host: ${{ secrets.HOST_DNS }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          debug: true
+          
+          working-directory: ./server
+          continue-on-error: false
           script: |
             git pull origin main
             npm install
