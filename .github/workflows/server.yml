@@ -7,48 +7,17 @@ on:
 
 jobs:
   deploy:
+    name: Deploy to EC2 on level-300 branch push
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      - name: Install dependencies and deploy to EC2
+      - name: Checkout the files
+        uses: actions/checkout@v4
+        
+      - name: Deploy to server
         working-directory: ./server
-        run: |
-          date
-          pwd
-          ls -la
-          npm install
-          git pull origin main
-          npm install
-          /usr/local/bin/pm2 start server.js
-
-      - name: Restart PM2 process
-        working-directory: ./server
-        run: /usr/local/bin/pm2 restart server.js 
-
-      - name: Check PM2 process status
-        working-directory: ./server
-        run: /usr/local/bin/pm2 list  
-
-      - name: Check PM2 logs
-        working-directory: ./server
-        run: /usr/local/bin/pm2 logs  
-
-      - name: Debugging Info
-        working-directory: ./server
-        run: |
-          date
-          pwd
-          ls -la
-
+        uses: easingthemes/ssh-deploy@main
         env:
-          HOST: ${{ secrets.HOST_DNS }}
-          USERNAME: ${{ secrets.USERNAME }}
-          KEY: ${{ secrets.EC2_SSH_KEY }}
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
