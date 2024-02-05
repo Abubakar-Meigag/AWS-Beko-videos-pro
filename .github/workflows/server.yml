@@ -6,8 +6,12 @@ on:
       - main
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: self-hosted
+    strategy:
+      matrix:
+        node-version: 
+          - latest
 
     steps:
       - name: Checkout code
@@ -27,7 +31,7 @@ jobs:
         run: npm install
 
       - name: Deploy to EC2
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@main
         with:
           host: ${{ secrets.HOST_DNS }}
           username: ${{ secrets.EC2_USERNAME }}
