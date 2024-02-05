@@ -20,10 +20,10 @@ jobs:
         id: install-dependencies
         run: npm ci
 
-      - name: Deploy to Server
+      - name: Deploy to Server 1
         uses: beko-ec2-server/ssh-deploy@main
 
-    working-directory: ./server
+      working-directory: ./server
       - name: Create .env File
         id: create-env-file
         run: |
