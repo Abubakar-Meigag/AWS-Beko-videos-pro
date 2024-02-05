@@ -22,7 +22,8 @@ jobs:
         run: cd ./server
 
       - name: Install dependencies
-        run: npm install
+        id: install-dependencies
+        run: npm ci
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
