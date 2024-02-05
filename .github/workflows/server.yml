@@ -13,13 +13,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set SSH key permissions
-        run: chmod 600 ${{ secrets.EC2_SSH_KEY }}
-
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 18.14.0
+
+      - name: Navigate to server directory
+        run: cd ./server
 
       - name: Install dependencies
         working-directory: ./server
