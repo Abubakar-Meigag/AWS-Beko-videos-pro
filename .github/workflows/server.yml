@@ -31,10 +31,10 @@ jobs:
           host: ${{ secrets.HOST_DNS }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          
+
           working-directory: ./server
-          continue-on-error: false
           script: |
+            cd ./server
             git pull origin main
             npm install
             pm2 restart server.js
