@@ -3,8 +3,8 @@ name: Update EC2 server
 on:
   push:
     branches: 
-      - main;
-      
+      - main
+
 jobs:
   build:
     runs-on: self-hosted
@@ -23,7 +23,6 @@ jobs:
       - name: Deploy to Server 1
         uses: beko-ec2-server/ssh-deploy@main
 
-      working-directory: ./server
       - name: Create .env File
         id: create-env-file
         run: |
