@@ -30,7 +30,7 @@ jobs:
           npm install
           git pull origin main
           npm install
-          pm2 restart server.js
+          pm2 start server.js
 
       - name: Check PM2 process status
         working-directory: ./server
