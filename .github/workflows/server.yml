@@ -19,15 +19,12 @@ jobs:
         continue-on-error: false
         run: npm install
 
-      - name: Create .env File
-        id: create-env-file
-        run: |
-          touch ./server/.env
-          echo "EC2_HOST=${{ secrets.HOST_DNS }}" >> ./server/.env
-          echo "EC2_SSH_KEY=${{ secrets.EC2_SSH_KEY }}" >> ./server/.env
-          echo "EC2_USERNAME=${{ secrets.USERNAME }}" >> ./server/.env
-        working-directory: ./server
-        continue-on-error: false
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
 
       - name: Run Tests
         run: echo "No tests are available for this project"
