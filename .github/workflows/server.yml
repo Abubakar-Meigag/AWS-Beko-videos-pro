@@ -22,9 +22,9 @@ jobs:
       - name: Deploy to server
         uses: appleboy/ssh-action@master
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
-          REMOTE_HOST: ${{ secrets.HOST_DNS }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
+          EC2_SSH_KEY: ${{ secrets.EC2_SSH_KEY }}
+          HOST_DNS: ${{ secrets.HOST_DNS }}
+          USERNAME: ${{ secrets.USERNAME }}
 
       - name: Run Tests
         run: echo "No tests are available for this project"
