@@ -24,7 +24,6 @@ jobs:
         uses: beko-ec2-server/ssh-deploy@main
 
     working-directory: ./server
-        continue-on-error: false
       - name: Create .env File
         id: create-env-file
         run: |
