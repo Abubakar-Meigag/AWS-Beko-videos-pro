@@ -48,7 +48,7 @@ jobs:
           pwd
           ls -la
 
-     env:
-       HOST: ${{ secrets.HOST_DNS }}
-       USERNAME: ${{ secrets.USERNAME }}
-       KEY: ${{ secrets.EC2_SSH_KEY }}
+        env:
+          HOST: ${{ secrets.HOST_DNS }}
+          USERNAME: ${{ secrets.USERNAME }}
+          KEY: ${{ secrets.EC2_SSH_KEY }}
