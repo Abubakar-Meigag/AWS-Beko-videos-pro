@@ -28,7 +28,7 @@ const newVideoValidate = [
 
 
 app.get("/", (req, res) => {
-  res.json('server is running in AWS successfully');
+  res.json('server is running in AWS successfully and got changes from github action pipeline');
 });
 
 
