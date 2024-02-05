@@ -18,24 +18,37 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install dependencies and pm2
-        run: |
-          npm install -g pm2
-
       - name: Install dependencies and deploy to EC2
         working-directory: ./server
         run: |
+          date
           pwd
           ls -la
           npm install
           git pull origin main
           npm install
-          pm2 start server.js
+          /usr/local/bin/pm2 start server.js
+
+      - name: Restart PM2 process
+        working-directory: ./server
+        run: /usr/local/bin/pm2 restart server.js 
 
       - name: Check PM2 process status
         working-directory: ./server
-        run: pm2 list
-        env:
-          HOST: ${{ secrets.HOST_DNS }}
-          USERNAME: ${{ secrets.USERNAME }}
-          KEY: ${{ secrets.EC2_SSH_KEY }}
+        run: /usr/local/bin/pm2 list  
+
+      - name: Check PM2 logs
+        working-directory: ./server
+        run: /usr/local/bin/pm2 logs  
+
+      - name: Debugging Info
+        working-directory: ./server
+        run: |
+          date
+          pwd
+          ls -la
+
+     env:
+       HOST: ${{ secrets.HOST_DNS }}
+       USERNAME: ${{ secrets.USERNAME }}
+       KEY: ${{ secrets.EC2_SSH_KEY }}
