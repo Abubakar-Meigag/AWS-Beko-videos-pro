@@ -23,14 +23,13 @@ jobs:
 
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@v1.0.3
-        working-directory: ./server 
         with:
           host: ${{ secrets.HOST_DNS }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           port: 22 
-          script: | 
+          script: |
+            cd  AWS-Beko-videos-pro/server
             npm install
-            npm install -g pm2
             git pull origin main
-            pm2 start server.js
+            pm2 restart 0
