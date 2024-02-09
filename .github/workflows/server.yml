@@ -23,13 +23,13 @@ jobs:
 
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@v1.0.3
+        working-directory: ./server 
         with:
           host: ${{ secrets.HOST_DNS }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
           port: 22 
-          script: |
-            cd ./server  
+          script: | 
             npm install
             npm install -g pm2
             git pull origin main
