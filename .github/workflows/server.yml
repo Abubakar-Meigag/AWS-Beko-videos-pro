@@ -18,14 +18,19 @@ jobs:
         with:
           node-version: 18.14.0
 
-      - name: Install dependencies and deploy to EC2
-        working-directory: ./server
-        run: |
-          npm install
-          npm install -g pm2 
-          git pull origin main
-          pm2 start server.js
-        env:
-          HOST: ${{ secrets.HOST_DNS }}
-          USERNAME: ${{ secrets.USERNAME }}
-          KEY: ${{ secrets.EC2_SSH_KEY }}
+      - name: Install ssh client
+        run: sudo apt-get install openssh-client -y
+
+      - name: Run SSH command
+        uses: appleboy/ssh-action@main
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22 
+          script: |
+            cd ./server  
+            npm install
+            npm install -g pm2
+            git pull origin main
+            pm2 start server.js
