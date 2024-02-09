@@ -21,8 +21,8 @@ jobs:
       - name: Install ssh client
         run: sudo apt-get install openssh-client -y
 
-      - name: Run SSH command
-        uses: appleboy/ssh-action@main
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
