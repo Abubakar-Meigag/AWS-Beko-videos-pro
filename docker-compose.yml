@@ -1,0 +1,10 @@
+version: '1'
+
+services:
+  app:
+    image: abubakarmeigag/beko-videos:latest 
+    container_name: beko-image
+    restart: always
+    ports:
+      - "5002:5002"
+   
