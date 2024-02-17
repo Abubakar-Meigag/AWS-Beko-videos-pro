@@ -64,6 +64,7 @@ jobs:
           host: ${{ secrets.HOST_DNS }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
+          secret: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           port: 22
           script: |
             docker pull abubakarmeigag/beko-videos:latest
