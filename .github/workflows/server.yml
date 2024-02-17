@@ -9,10 +9,9 @@ on:
     docker-username: ${{ secrets.DOCKER_USERNAME }}
     docker-token: ${{ secrets.DOCKER_TOKEN }}
     key: ${{ secrets.EC2_SSH_KEY }}
-
   jobs:
     build:
-      runs-on: ubuntu-latest
+      runs-on: linux-latest
       steps:
         - name: Checkout code
           uses: actions/checkout@v2
@@ -35,7 +34,7 @@ on:
             
       deploy:
         needs: build
-        runs-on: ubuntu-latest
+        runs-on: linux-latest
         
       steps:
         - name: Checkout code
