@@ -2,11 +2,11 @@ FROM node:20-alpine
 
 WORKDIR  /server
 
-COPY /server .
+COPY server/package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY ./server .
 
 EXPOSE 5002
 
