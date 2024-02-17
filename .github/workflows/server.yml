@@ -67,10 +67,10 @@ jobs:
           secret: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           port: 22
           script: |
-            docker pull abubakarmeigag/beko-videos:latest
-            docker stop beko-videos || true
-            docker rm beko-videos || true
-            docker run -d --name beko-image -p 5002:5002 -e DBConnLink=${{ secrets.DB_LINK }} abubakarmeigag/beko-videos:latest
+            sudo docker pull abubakarmeigag/beko-videos:latest
+            sudo docker stop beko-videos || true
+            sudo docker rm beko-videos || true
+            sudo docker run -d --name beko-image -p 5002:5002 -e DBConnLink=${{ secrets.DB_LINK }} abubakarmeigag/beko-videos:latest
 
 
           
