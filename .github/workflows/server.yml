@@ -40,7 +40,7 @@ jobs:
           context: ./
           push: true
           dockerfile: ./Dockerfile
-          tags: ashokpoudel/cddemo:latest
+          tags: ashokpoudel/beko-videos:latest
 
   deploy:
     needs: build
