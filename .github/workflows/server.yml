@@ -60,19 +60,33 @@ jobs:
         run: |
           echo "${{ env.key }}" > key.pem
           chmod 600 key.pem
+          
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
+          script: |
+            docker pull abubakarmeigag/beko-videos:latest
+            docker stop beko-videos || true
+            docker rm beko-videos || true
+            docker run -d --name beko-image -p 5002:5002 -e DB_LINK=${{ secrets.DB_LINK }} abubakarmeigag/beko-videos:latest
+          
 
-      - name: Pull Docker image
-        run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@ec2-54-224-245-13.compute-1.amazonaws.com 'sudo docker pull abubakarmeigag/beko-videos:latest'
+      # - name: Pull Docker image
+      #   run: |
+      #     ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@ec2-54-224-245-13.compute-1.amazonaws.com 'sudo docker pull abubakarmeigag/beko-videos:latest'
 
-      - name: Stop running container
-        run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@ec2-54-224-245-13.compute-1.amazonaws.com 'sudo docker stop beko-videos || true'
-          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@ec2-54-224-245-13.compute-1.amazonaws.com 'sudo docker rm beko-videos || true'
+      # - name: Stop running container
+      #   run: |
+      #     ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@ec2-54-224-245-13.compute-1.amazonaws.com 'sudo docker stop beko-videos || true'
+      #     ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@ec2-54-224-245-13.compute-1.amazonaws.com 'sudo docker rm beko-videos || true'
 
-      - name: Run new container
-        run: |
-          ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@ec2-54-224-245-13.compute-1.amazonaws.com 'sudo docker run -d --name beko-image -p 5002:5002 -e DB_LINK=${{ secrets.DB_LINK }} abubakarmeigag/beko-videos:latest'
+      # - name: Run new container
+      #   run: |
+      #     ssh -o StrictHostKeyChecking=no -i key.pem ec2-user@ec2-54-224-245-13.compute-1.amazonaws.com 'sudo docker run -d --name beko-image -p 5002:5002 -e DB_LINK=${{ secrets.DB_LINK }} abubakarmeigag/beko-videos:latest'
 
     # steps:
     #   - name: Checkout code
