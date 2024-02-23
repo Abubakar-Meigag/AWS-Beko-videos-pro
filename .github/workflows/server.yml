@@ -31,18 +31,13 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{  secrets.DOCKER_TOKEN }}
 
-      # - name: Build and push Docker image
-      #   uses: docker/build-push-action@v2
-      #   with:
-      #     context: ./
-      #     push: true
-      #     dockerfile: ./Dockerfile
-      #     tags: abubakarmeigag/beko-videos:latest
-      - name: Build and Push Docker Image to Docker Hub
-        context: ./
-        run: |
-        docker build -t "${{ secrets.DOCKER_USERNAME }}/beko-videos:latest" -f Dockerfile .
-        docker push "${{ secrets.DOCKER_USERNAME }}/beko-videos:latest"
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          push: true
+          dockerfile: ./Dockerfile
+          tags: abubakarmeigag/beko-videos:latest
 
   deploy:
     needs: build
