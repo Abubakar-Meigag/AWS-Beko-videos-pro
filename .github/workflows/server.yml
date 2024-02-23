@@ -39,8 +39,8 @@ jobs:
       #     dockerfile: ./Dockerfile
       #     tags: abubakarmeigag/beko-videos:latest
       - name: Build and Push Docker Image to Docker Hub
-        run: |
         context: ./
+        run: |
         docker build -t "${{ secrets.DOCKER_USERNAME }}/beko-videos:latest" -f Dockerfile .
         docker push "${{ secrets.DOCKER_USERNAME }}/beko-videos:latest"
 
