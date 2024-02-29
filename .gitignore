@@ -128,3 +128,13 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+
+/terraform/Variables.tf
+
+# Exclude private keys
+*.pem
+*.key
+*.tfstate
+*.tfstate.backup
+.terraform
