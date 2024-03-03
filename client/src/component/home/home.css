@@ -34,7 +34,7 @@
 }
 
 .search-btn {
-    color: #fff;
+    color: #73b0e9;
     font-size: 1rem;
     display: flex;
     align-items: center;
@@ -50,7 +50,7 @@
 
 .form-select {
     background-color: rgba(0, 0, 0, 0.137);
-    color: #d91616;
+    color: #b3b3b3;
     border-radius: 20px;
     padding-left: 10px;
     border: 1px solid rgb(51, 50, 50);
