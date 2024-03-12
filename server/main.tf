@@ -51,7 +51,7 @@ resource "aws_security_group" "beko-SG-group" {
   }
 }
 
-resource "aws_instance" "beko-ec2-serves" {
+resource "aws_instance" "beko-terraform-ec2" {
   instance_type          = "t2.micro"
   ami                    = "ami-0a3c3a20c09d6f377"
   vpc_security_group_ids = ["sg-0546c27f8263d9160"]
@@ -59,10 +59,10 @@ resource "aws_instance" "beko-ec2-serves" {
 
 
   tags = {
-    Name = "beko-ec2_serves"
+    Name = "beko-terraform-ec2"
   }
 
-  provisioner "remote" {
+  provisioner "remote-exec" {
     connection {
       type        = "ssh"
       user        = "ec2-user"  

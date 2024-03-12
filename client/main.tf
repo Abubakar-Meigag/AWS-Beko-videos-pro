@@ -2,8 +2,8 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_s3_bucket" "beko-videos" {
-  bucket = "beko-videos"
+resource "aws_s3_bucket" "beko-videos-bucket" {
+  bucket = "beko-videos-bucket"
 
   website {
     index_document = "index.html"
@@ -21,7 +21,7 @@ resource "aws_s3_bucket" "beko-videos" {
 }
 
 resource "aws_s3_bucket_policy" "beko-videos_bucket_policy" {
-  bucket = aws_s3_bucket.beko-videos.bucket
+  bucket = aws_s3_bucket.beko-videos-bucket.bucket
 
   policy = <<EOF
 {
@@ -32,7 +32,7 @@ resource "aws_s3_bucket_policy" "beko-videos_bucket_policy" {
             "Effect": "Allow",
             "Principal": "*",
             "Action": "s3:GetObject",
-            "Resource": "arn:aws:s3:::beko-videos/*"
+            "Resource": "arn:aws:s3:::beko-videos-bucket/*"
         }
     ]
 }
@@ -40,7 +40,7 @@ EOF
 }
 
 resource "aws_s3_bucket_public_access_block" "beko-videos_public_access_block" {
-  bucket = aws_s3_bucket.beko-videos.id
+  bucket = aws_s3_bucket.beko-videos-bucket.id
 
   block_public_acls       = false
   ignore_public_acls      = false
@@ -48,8 +48,8 @@ resource "aws_s3_bucket_public_access_block" "beko-videos_public_access_block" {
   restrict_public_buckets = false
 }
 
-resource "aws_s3_bucket_website_configuration" "beko-videos_website" {
-  bucket = aws_s3_bucket.beko-videos.bucket
+resource "aws_s3_bucket_website_configuration" "beko-videos-bucket-website" {
+  bucket = aws_s3_bucket.beko-videos-bucket.bucket
 
   index_document {
     suffix = "index.html"

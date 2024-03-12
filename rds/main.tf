@@ -2,19 +2,9 @@ provider "aws" {
   region = "us-east-1"  
 }
 
-# Use an existing VPC
-data "aws_vpc" "existing" {
-  id = "vpc-087693feeb524f78f"
-}
-
-# Use an existing subnet group
-data "aws_db_subnet_group" "existing" {
-  name = "vpc-087693feeb524f78f"
-}
-
-resource "aws_db_instance" "junita" {
+resource "aws_db_instance" "beko-db-aws" {
   
-  identifier            = "beko-aws-db"
+  identifier            = "beko-db-aws"
   allocated_storage     = 20 
   engine                = "postgres"
   engine_version        = "15.5"
@@ -24,6 +14,7 @@ resource "aws_db_instance" "junita" {
   password              = "password"
   parameter_group_name  = "default.postgres15"
   publicly_accessible   = true
-  vpc_security_group_ids = ["sg-0546c27f8263d9160"]  
- 
+  vpc_security_group_ids = ["sg-0546c27f8263d9160"]
+  skip_final_snapshot = true
+  # final_snapshot_identifier = "beko-db-aws-snapshot"
 }
